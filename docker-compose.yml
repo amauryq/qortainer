@@ -1,0 +1,18 @@
+# Portainer # Home->Environments->Local: Set to the IP of thq QNAP server
+services:
+  portainer:
+    container_name: portainer
+    image: portainer/portainer-ee:latest
+    restart: unless-stopped
+    ports:
+      - 9000:9000      # http UI.
+#      - 9443:9443     # https UI.
+#      - 8000:8000/tcp # Optional and is only required if you plan to use the Edge compute features with Edge agents.
+    volumes:
+      - /share/Portainer:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /etc/TZ:/etc/localtime:ro
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      TZ: America/New_York
